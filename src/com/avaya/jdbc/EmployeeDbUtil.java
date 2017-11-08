@@ -1,0 +1,176 @@
+package com.avaya.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class EmployeeDbUtil {
+	
+	
+	
+	
+
+	public List<Employee> getEmployees() throws Exception {
+		
+		// method will return a list array of employees, create empty list here to populate with the result set below
+		
+		List<Employee> employees = new ArrayList<>();
+		
+		
+		//JDBC Objects
+		
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		
+		try {
+			
+			//get a DB connection
+			//driver details
+			Class.forName("com.mysql.jdbc.Driver");
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");
+			
+			//sql to return all employees 
+			String sql = "Select * from employee order by last_name";
+			
+			myStmt = myConn.createStatement();
+			
+			//result set
+			myRs = myStmt.executeQuery(sql);
+			
+			
+			//Loop over the result set and create new employee objects for each row returned
+			
+			while(myRs.next()) {
+				
+				//get the data
+				
+				 int id = myRs.getInt("id");
+				 String firstName= myRs.getString("first_name");
+				 String lastName = myRs.getString("last_name");
+				 String email= myRs.getString("email");
+				 String department= myRs.getString("department");
+				
+				// create the employee object and add to the array list
+				 
+				 Employee tempemployee = new Employee(id,firstName,lastName,email,department);
+				 
+				 // add it to the array to send back to the calling servlet
+				 employees.add(tempemployee);
+				 
+				 
+			}		
+			
+		}
+		
+		
+		catch(Exception exc){ exc.printStackTrace(); };
+				return employees;	
+	}
+
+	public void addEmployee(Employee theEmployee) {
+	
+		//method takes param of new employee object to be added
+		
+		//jdbc objects
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		
+		try {
+		
+	
+			//get a DB connection
+			//driver details
+			Class.forName("com.mysql.jdbc.Driver");
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");	
+			
+			//write the sql
+			String sql = "Insert into employee (first_name, last_name, email, department) values (?,?,?,?)";
+			
+			//prepare the stmt
+			
+			myStmt = myConn.prepareStatement(sql);
+			
+			//set the params, get the data from the employee object created in servlet
+			myStmt.setString(1, theEmployee.getFirstName());
+			myStmt.setString(2, theEmployee.getLastName());
+			myStmt.setString(3, theEmployee.getEmail());
+			myStmt.setString(4, theEmployee.getDepartment());	
+			
+			// add the new employee
+			myStmt.execute();
+			
+		}
+		
+		catch(Exception exc){ exc.printStackTrace(); };
+				
+	}
+
+	public Employee loadEmployee(String theEmployeeId) {
+		
+		
+		Employee theEmployee = null;
+		
+		//jdbc objects
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		int employeeId;
+		
+		try {
+			
+			//convert id to int
+			employeeId = Integer.parseInt(theEmployeeId);
+			
+			//get a DB connection
+			//driver details
+			Class.forName("com.mysql.jdbc.Driver");
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");	
+			
+			//sql to get the selected student
+			
+			String sql="select * from employee where id=?";
+			
+			//create the prepareed statement
+			
+			myStmt = myConn.prepareStatement(sql);
+			
+			//set params
+			myStmt.setInt(1, employeeId );
+			
+			
+			//execute statement
+			
+			myRs = myStmt.executeQuery();
+			
+			//retrieve data from the result set row, create new object
+			
+			while(myRs.next()) {
+			
+			 int id = myRs.getInt("id");
+			 String firstName= myRs.getString("first_name");
+			 String lastName = myRs.getString("last_name");
+			 String email= myRs.getString("email");
+			 String department= myRs.getString("department");
+			
+				
+			//use the studentID in the constructor to create a new student object
+				theEmployee = new Employee(id,firstName,lastName,email,department);	
+			
+			}
+			
+		}
+		
+	
+		catch(Exception exc){ exc.printStackTrace(); };
+		
+		
+		return theEmployee;
+	}
+	
+}
