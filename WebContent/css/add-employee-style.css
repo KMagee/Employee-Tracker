@@ -7,9 +7,9 @@ label {
 	width: 100px; 
 	display: block; 
 	text-align: right;
-	margin-right: 10px;
 	margin-top: 8px;
 	margin-bottom: 8px;
+	margin-right: -50px;
 }
 
 input {
@@ -18,7 +18,23 @@ input {
 	border-radius: 5px; 
 	padding: 4px; 
 	font-size: 16px;
+	margin-right: 8px;
+	position : relative
+	
 }
+
+
+.showError {display:block;
+position: absolute;
+			
+
+    
+}
+
+
+.hideError {display:none;
+}
+
 
 .save {
 	font-weight: bold;
@@ -30,7 +46,7 @@ input {
 
 table {   
 	border-style:none;
-	width:50%;
+	width:72%;
 }
 
 tr:nth-child(even) {background: #FFFFFF}

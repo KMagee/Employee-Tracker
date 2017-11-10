@@ -27,16 +27,10 @@
 <div id="container">
 	<div id="content">
 	
-	<!-- Add in the button for New Employee
+	<!-- Add in the button for New Employee, have event listener to redirect to the form-->
+	<input type="button" value="Add Employee" id="myBtn" class="add-employee-button"/>
 	
-	TO DO: Replace inline onclick with JS
-	 -->
-	
-	<input type="button" value="Add Employee"
-	onclick="window.location.href='add-employee-form.jsp'; return false"
-	class="add-employee-button"/>
-	
-	
+
 	<table>
 			<tr>
 				<th>Employee ID</th>
@@ -63,13 +57,25 @@
 		
 		</c:url>
 		
+		<!-- set up the link for the Delete url, embed the command and the chosen employee id to be sent to the servlet-->
+		
+		<c:url var ="deleteLink" value="EmployeeControllerServlet">
+			<c:param name="command" value="DELETE"/>
+			<c:param name="employeeID" value="${tempEmployee.id}"/>
+		
+		</c:url>
+		
+		
+		
 				<tr>
 					<td> ${tempEmployee.id} </td>
 					<td> ${tempEmployee.firstName} </td>
 					<td> ${tempEmployee.lastName} </td>
 					<td> ${tempEmployee.email} </td>
 					<td> ${tempEmployee.department} </td>
-					<td><a href="${updateLink}">Update</a></td>
+					<td><a href="${updateLink}">Update</a> 
+						 | 
+						<a href="${deleteLink}" onclick="if (!(confirm('Are you sure you want to delete this student?'))) return false">Delete</a></td>
 				</tr>
 		</c:forEach>
 	</table>
@@ -78,4 +84,7 @@
 </div>
 
 </body>
+
+<script src="js/myBtn.js"></script>
+
 </html>

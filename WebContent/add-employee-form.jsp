@@ -7,6 +7,19 @@
 <title>Add Employee</title>
 <link type="text/css" rel="stylesheet" href="css/style.css">
 <link type="text/css" rel="stylesheet" href="css/add-employee-style.css">
+
+
+<style>
+.showError {display:inline;
+}
+
+
+.hideError {display:none;
+}
+
+</style>
+
+
 </head>
 <body>
 	
@@ -30,7 +43,8 @@
 				<tbody>
 					<tr>
 						<td><label>First Name:</label></td>
-						<td><input type="text" name="firstName"/></td>
+						<td><input type="text" name="firstName" id='firstName'/><span class='hideError' id='msgUsernameError'>Username must be 3-12 characters</span></td>	
+					
 					</tr>
 					<tr>
 						<td><label>Last Name:</label></td>
@@ -59,10 +73,12 @@
 		
 		<div style="clear : both;"></div>
 		
-		<p><a href="EmployeeControlServlet">Back to List</a></p>
+		<p><a href="EmployeeControllerServlet">Back to List</a></p>
 		
 	</div>
 	
 
 </body>
+<script src="js/formValidation.js"></script>
+
 </html>

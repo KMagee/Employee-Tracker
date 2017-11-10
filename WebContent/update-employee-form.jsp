@@ -20,16 +20,18 @@
 		<h3>Update Employee</h3>
 		
 		<!-- form submit request to the controller servlet using GET-->
-		<form action="EmployeeControllerServlet" method="GET">
+		<form action="EmployeeControllerServlet" method="get">
 		
 			<!-- Pass this hidden value  UPDATE command to the servlet, use in the switch statement to get the UPDATE method  -->
 			<input type="hidden" name="command" value="UPDATE"/>
 			
-			<input type="hidden" name="employeeId" value="${THE_EMPLOYEE.id}"/>
-			
 			<!-- Not including ID in the new emp form as this value is created by the DB -->
 			<table>
 				<tbody>
+					<tr>
+						<td><label>Employee ID:</label></td>
+						<td><input type="text" name="employeeId" value="${THE_EMPLOYEE.id}" readonly/></td>
+					</tr>
 					<tr>
 						<td><label>First Name:</label></td>
 						<td><input type="text" name="firstName" value="${THE_EMPLOYEE.firstName}"/></td>
@@ -61,7 +63,7 @@
 		
 		<div style="clear : both;"></div>
 		
-		<p><a href="EmployeeControlServlet">Back to List</a></p>
+		<p><a href="EmployeeControllerServlet">Back to List</a></p>
 		
 	</div>
 	

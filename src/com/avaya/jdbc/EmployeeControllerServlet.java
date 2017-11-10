@@ -53,10 +53,23 @@ public class EmployeeControllerServlet extends HttpServlet {
 			break;
 			
 			
-			//from the update link, used to prepoulate the employee update form for a chosen employee 
+			//from the update link in the main page, used to pre-populate the employee update form for a chosen employee 
 			case "LOAD":
 			loadEmployee(request, response);
 			break;
+			
+			//from the update-employee.jsp form submit, call the update method
+			//<input type="hidden" name="command" value="UPDATE"/>
+			case "UPDATE":
+			updateEmployee(request,response);
+			break;
+			
+			//from the delete URL -- <c:param name="command" value="DELETE"/>
+			case "DELETE":
+			deleteEmployee(request,response);
+			break;
+			
+			
 			
 			default:
 				listEmployees(request, response);
@@ -68,6 +81,48 @@ public class EmployeeControllerServlet extends HttpServlet {
 			throw new ServletException(exc);
 		}
 	
+	}
+
+
+
+	private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// get the ID of the employee to be deleted
+		
+		String theEmployeeId = request.getParameter("employeeID");
+		
+		//send the ID to the DB Util and call the delete method
+		employeeDbUtil.deleteEmployee(theEmployeeId);
+	
+		
+		//return to the main list of employees
+		listEmployees(request, response);
+		
+	}
+
+
+
+	private void updateEmployee(HttpServletRequest request , HttpServletResponse response) throws Exception {
+		// get the form data
+		
+		//need to parse to an int to create the employee object
+		int id = Integer.parseInt(request.getParameter("employeeId"));
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String email = request.getParameter("email");
+		String department = request.getParameter("department");
+		
+		
+		
+		//create employee object using the constructor with id, pass to the dbutil
+		 Employee theEmployee = new Employee(id,firstName,lastName,email,department);
+		 
+	
+		 //update the DB 
+		employeeDbUtil.updateEmployee(theEmployee);
+		 
+		
+		//return to the main list with updated info
+		listEmployees(request, response);
 	}
 
 

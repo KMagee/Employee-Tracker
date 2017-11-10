@@ -172,5 +172,84 @@ public class EmployeeDbUtil {
 		
 		return theEmployee;
 	}
+
+	public void updateEmployee(Employee theEmployee) throws Exception{
+		//jdbc objects
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		
+	
+		try {
+		//get DB Connection
+		Class.forName("com.mysql.jdbc.Driver");
+		myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");
+		
+		
+		//sql
+		String sql = "Update employee set first_name=?,last_name=?,email=?,department=? where id=?";
+		
+		
+		//prepare stmt
+		
+		myStmt = myConn.prepareStatement(sql);
+		
+		
+		//set statement params using the employee object passed in from the controller servlet
+		
+		myStmt.setString(1, theEmployee.getFirstName());
+		myStmt.setString(2, theEmployee.getLastName());
+		myStmt.setString(3, theEmployee.getEmail());
+		myStmt.setString(4, theEmployee.getDepartment());
+		//where
+		myStmt.setInt(5,theEmployee.getId());
+		
+		
+	
+		// execute the update stmt
+		myStmt.execute();		
+		}
+		catch(Exception exc){ exc.printStackTrace(); };
+		
+		
+	}
+
+	public void deleteEmployee(String theEmployeeId) throws Exception {
+		
+		
+		
+		//jdbc objects
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		int employeeId; 
+		
+		try {
+			
+			employeeId = Integer.parseInt(theEmployeeId);
+			
+			//get DB Connection
+			Class.forName("com.mysql.jdbc.Driver");
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");
+			
+			
+			//sql 
+			String sql = "Delete from employee where id=?";
+			
+			//prepare stmt;
+			
+			myStmt = myConn.prepareStatement(sql);
+			
+			//set params
+			
+			myStmt.setInt(1,employeeId);
+			
+			//execute statement
+			myStmt.execute();
+			
+		}
+		
+		catch(Exception exc){ exc.printStackTrace(); };
+			
+	}
+	
 	
 }
