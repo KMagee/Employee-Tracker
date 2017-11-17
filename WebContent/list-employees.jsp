@@ -75,7 +75,7 @@
 					<td> ${tempEmployee.department} </td>
 					<td><a href="${updateLink}">Update</a> 
 						 | 
-						<a href="${deleteLink}" onclick="if (!(confirm('Are you sure you want to delete this student?'))) return false">Delete</a></td>
+						<a id="deleteLink" href="${deleteLink}">Delete</a></td>
 				</tr>
 		</c:forEach>
 	</table>

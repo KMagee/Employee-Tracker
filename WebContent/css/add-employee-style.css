@@ -9,7 +9,7 @@ label {
 	text-align: right;
 	margin-top: 8px;
 	margin-bottom: 8px;
-	margin-right: -50px;
+	
 }
 
 input {
@@ -22,6 +22,21 @@ input {
 	position : relative
 	
 }
+
+select
+ {
+	width: 250px;
+	border: 1px solid #666; 
+	border-radius: 5px; 
+	padding: 4px; 
+	font-size: 15px;
+	margin-right: 8px;
+	position : relative
+	
+}
+
+
+
 
 
 .showError {display:block;
@@ -55,5 +70,9 @@ tr:nth-child(odd) {background: #FFFFFF}
 tr {
 	border-style:none;
 	text-align:left;	
+}
+	
+#employeeId {
+     background: #cccccc;;
 }
 	

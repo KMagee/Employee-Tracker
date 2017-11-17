@@ -9,6 +9,7 @@
 <link type="text/css" rel="stylesheet" href="css/add-employee-style.css">
 
 
+
 <style>
 .showError {display:inline;
 }
@@ -33,7 +34,7 @@
 		<h3>Add Employee</h3>
 		
 		<!-- form submit request to the controller servlet using GET-->
-		<form action="EmployeeControllerServlet" method="GET">
+		<form name="addEmployee" action="EmployeeControllerServlet" method="GET">
 		
 			<!-- Pass this hidden value  ADD command to the servlet, use in the switch statement to get the add method  -->
 			<input type="hidden" name="command" value="ADD"/>
@@ -43,25 +44,38 @@
 				<tbody>
 					<tr>
 						<td><label>First Name:</label></td>
-						<td><input type="text" name="firstName" id='firstName'/><span class='hideError' id='msgUsernameError'>Username must be 3-12 characters</span></td>	
+						<td><input type="text" name="firstName" id='firstName' autofocus/><span class='hideError' id='msgUsernameError'>Please enter First Name. Must be between 1 & 20 alphabetic characters</span></td>	
 					
 					</tr>
 					<tr>
 						<td><label>Last Name:</label></td>
-						<td><input type="text" name="lastName"/></td>
+						<td><input type="text" name="lastName" id="lastName" /><span class='hideError' id='msgLastNameError'>Please enter Last Name. Must be between 1 & 20 alphabetic characters</span></td>
 					</tr>
 					<tr> 
 						<td><label>Email:</label></td>
-						<td><input type="text" name="email"/></td>
+						<td><input type="text" name="email" id="email"/><span class='hideError' id='msgEmailError'>Please enter email. Must contain only alphanumeric chars and end with @avaya.com</span></td>
 					 </tr>	
 					<tr>
 						<td><label>Department:</label></td>
-						<td><input type="text" name="department"/></td>
+					
+					<td><select name="department" id="department">
+							 <option value="SelectOption">-- select an option -- </option>
+							  <option value="Marketing">Marketing</option>
+							  <option value="HR">HR</option>
+							  <option value="Finance">Finance</option>
+							  <option value="IT">IT</option>
+						</select> <span class='hideError' name='msgDepartmentError' id='msgDepartmentError' >Please select a department</span>  </td>
+					
+					
+					
+					<!-- <td><input type="text" name="department" id="department" /></td>  -->	
+					
+					
 					</tr>
 					
 					<tr>
 						<td><label></label></td>
-						<td><input type="submit" value="Save" class="save"/></td> 
+						<td><input name='saveBtn' id='saveBtn' type="submit" value="Save" class="save"/></td> 
 					
 					</tr>
 
@@ -77,8 +91,8 @@
 		
 	</div>
 	
-
 </body>
-<script src="js/formValidation.js"></script>
+
+<script src="js/addEmployeeFormValidation.js"></script>
 
 </html>
