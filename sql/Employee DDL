@@ -19,4 +19,4 @@ CREATE TABLE `employee` (
 --
 -- Initial data for `employee`
 --
-INSERT INTO `employee` VALUES (1,'Mary','Public','mary@email.com','Marketing'),(2,'John','Doe','john@email.com','Sales'),(3,'Ajay','Rao','ajay@email.com', 'Accounting'),(4,'Bill','Neely','bill@email.com', 'IT'),(5,'Maxwell','Dixon','max@email.com', 'HR');
+INSERT INTO `employee` VALUES (1,'Mary','Public','mary@avaya.com','Marketing'),(2,'John','Doe','john@avaya.com','IT'),(3,'Ajay','Rao','ajay@avaya.com', 'HR'),(4,'Bill','Neely','bill@avaya.com', 'Finance'),(5,'Maxwell','Dixon','max@avaya.com', 'HR');
