@@ -1,11 +1,22 @@
 //turn off the button
-document.getElementById('saveBtn').disabled = "disabled";
+//document.getElementById('saveBtn').disabled = "disabled";
 
-//declare  flags
-let firstNameFlag = false
-let lastNameFlag = false
-let emailFlag = false
-let departmentFlag=false
+//declare  flags, set true on load as data should have already been validated when first added
+let firstNameFlag = true
+let lastNameFlag = true
+let emailFlag = true
+let departmentFlag=true
+
+
+document.addEventListener('DOMContentLoaded', function() {
+   
+	validateFirstName();
+	validateLastName();
+	validateEmail();
+	validateDepartment();
+	
+}, false);
+
 
 
 
@@ -28,11 +39,12 @@ if(!firstName.value.match(letters)
 } else {
 	
 	firstNameFlag=true
-	validateForm()
+	validateForm();
+
   // hide the error message
 	msgUsernameError.setAttribute('class', 'hideError')
-	document.getElementById('lastName').disabled = false;
-	document.getElementById("lastName").focus();
+	
+	
 	
 }
 }
@@ -66,11 +78,11 @@ validateLastName = () => {
 	} else {
 		
 		lastNameFlag=true
-		validateForm()
+		validateForm();
 		  // hide the error message and move to the next field
 		msgLastNameError.setAttribute('class', 'hideError');
-		document.getElementById('email').disabled = false;
-		document.getElementById("email").focus();
+		
+		
 		
 			
 	}
@@ -103,8 +115,8 @@ validateEmail = () => {
 		emailFlag=true
 		validateForm()
 		msgEmailError.setAttribute('class', 'hideError')
-		document.getElementById('department').disabled = false
-		document.getElementById('department').focus()
+		
+		
 		
 	}
 	
@@ -128,7 +140,7 @@ validateDepartment = () =>{
 		departmentFlag=true
 		validateForm()
 		msgDepartmentError.setAttribute('class', 'hideError')
-		document.getElementById('saveBtn').focus()
+		
 	}
 	
 }
