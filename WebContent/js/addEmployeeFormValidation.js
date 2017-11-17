@@ -1,12 +1,12 @@
 
-//start with only first name enabled
+//start with only first name enabled, enable the others as valid data is input
 document.getElementById('lastName').disabled = "disabled";
 document.getElementById('email').disabled = "disabled";
 document.getElementById('department').disabled = "disabled";
 document.getElementById('saveBtn').disabled = "disabled";
 
 
-//declare  flags
+//declare  flags, set to false at beginning and adjust as data is enterd
 let firstNameFlag = false
 let lastNameFlag = false
 let emailFlag = false
@@ -16,40 +16,39 @@ let departmentFlag=false
 
 //validate first name, if not null, and 
 //username must be a between 3 and 20 alhpabetic characters
-validateFirstName = ()=>{
-
+validateFirstName = ()=>
+{
 var letters = /^[A-Za-z]+$/;  
     	
-if(!firstName.value.match(letters) 
-		|| firstName.value.lenghth===0 
-		||firstName.value.length < 3 
-		|| firstName.value.length > 20 ){
-  // show the error message
-	msgUsernameError.setAttribute('class', 'showError')
-	firstNameFlag=false
-	validateForm()
-	
-} else {
-	
-	firstNameFlag=true
-	validateForm()
-  // hide the error message
-	msgUsernameError.setAttribute('class', 'hideError')
-	document.getElementById('lastName').disabled = false;
-	document.getElementById("lastName").focus();
-	
-}
+		if(!firstName.value.match(letters) 
+				|| firstName.value.lenghth===0 
+				||firstName.value.length < 3 
+				|| firstName.value.length > 20 )
+		{
+			// show the error message
+			msgUsernameError.setAttribute('class', 'showError')
+			//set flag
+			firstNameFlag=false
+			validateForm()
+		} else 
+		
+		{
+		
+		firstNameFlag=true
+		validateForm()
+		// hide the error message
+		msgUsernameError.setAttribute('class', 'hideError')
+		document.getElementById('lastName').disabled = false;
+		document.getElementById("lastName").focus();
+		}
 }
 
+//add event listener for the first name
 firstName.addEventListener('blur', validateFirstName)
 
 
 
 //validate last name
-
-//lastNameError id
-//lastName
-
 validateLastName = () => {
 	var letters = /^[A-Za-z\s]+$/;
 	
@@ -58,12 +57,11 @@ validateLastName = () => {
 	if(!lastName.value.match(letters) || 
 			lastName.value.length===0 || 
 			lastName.value.length < 3 || 
-			lastName.value.length > 20){
+			lastName.value.length > 20)
+	{
 		
 		//show the error message in the span
-		
 		msgLastNameError.setAttribute('class', 'showError')	
-					
 		lastNameFlag=false
 		validateForm()
 		
@@ -75,8 +73,7 @@ validateLastName = () => {
 		msgLastNameError.setAttribute('class', 'hideError');
 		document.getElementById('email').disabled = false;
 		document.getElementById("email").focus();
-		
-			
+				
 	}
 
 }
