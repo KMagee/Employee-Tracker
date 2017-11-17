@@ -51,7 +51,7 @@ firstName.addEventListener('blur', validateFirstName)
 //lastName
 
 validateLastName = () => {
-	var letters = /^[A-Za-z]+$/;
+	var letters = /^[A-Za-z\s]+$/;
 	
 	//only alphabetic characters, not null, between 3 and 20 chars
 	
