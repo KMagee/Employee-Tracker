@@ -7,20 +7,10 @@
 <title>Add Employee</title>
 <link type="text/css" rel="stylesheet" href="css/style.css">
 <link type="text/css" rel="stylesheet" href="css/add-employee-style.css">
-
-
-
 <style>
-.showError {display:inline;
-}
-
-
-.hideError {display:none;
-}
-
+.showError {display:inline;}
+.hideError {display:none;}
 </style>
-
-
 </head>
 <body>
 	

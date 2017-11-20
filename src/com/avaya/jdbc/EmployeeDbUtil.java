@@ -1,15 +1,13 @@
 package com.avaya.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+ 
 
-
-public class EmployeeDbUtil {
+public class EmployeeDbUtil extends DBConnection {
 	
 	
 	
@@ -24,7 +22,7 @@ public class EmployeeDbUtil {
 		
 		//JDBC Objects
 		
-		Connection myConn = null;
+		//Connection myConn = null;
 		Statement myStmt = null;
 		ResultSet myRs = null;
 		
@@ -32,13 +30,13 @@ public class EmployeeDbUtil {
 			
 			//get a DB connection
 			//driver details
-			Class.forName("com.mysql.jdbc.Driver");
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");
+//			Class.forName("com.mysql.jdbc.Driver");
+//			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");
 			
 			//sql to return all employees 
 			String sql = "Select * from employee order by last_name";
 			
-			myStmt = myConn.createStatement();
+			myStmt = getConnection().createStatement();
 			
 			//result set
 			myRs = myStmt.executeQuery(sql);
@@ -78,7 +76,7 @@ public class EmployeeDbUtil {
 		//method takes param of new employee object to be added
 		
 		//jdbc objects
-		Connection myConn = null;
+		//Connection myConn = null;
 		PreparedStatement myStmt = null;
 		
 		try {
@@ -86,15 +84,15 @@ public class EmployeeDbUtil {
 	
 			//get a DB connection
 			//driver details
-			Class.forName("com.mysql.jdbc.Driver");
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");	
+//			Class.forName("com.mysql.jdbc.Driver");
+//			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");	
 			
 			//write the sql
 			String sql = "Insert into employee (first_name, last_name, email, department) values (?,?,?,?)";
 			
 			//prepare the stmt
 			
-			myStmt = myConn.prepareStatement(sql);
+			myStmt = getConnection().prepareStatement(sql);
 			
 			//set the params, get the data from the employee object created in servlet
 			myStmt.setString(1, theEmployee.getFirstName());
@@ -117,7 +115,7 @@ public class EmployeeDbUtil {
 		Employee theEmployee = null;
 		
 		//jdbc objects
-		Connection myConn = null;
+		//Connection myConn = null;
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 		int employeeId;
@@ -129,8 +127,8 @@ public class EmployeeDbUtil {
 			
 			//get a DB connection
 			//driver details
-			Class.forName("com.mysql.jdbc.Driver");
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");	
+//			Class.forName("com.mysql.jdbc.Driver");
+//			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");	
 			
 			//sql to get the selected student
 			
@@ -138,7 +136,7 @@ public class EmployeeDbUtil {
 			
 			//create the prepareed statement
 			
-			myStmt = myConn.prepareStatement(sql);
+			myStmt = getConnection().prepareStatement(sql);
 			
 			//set params
 			myStmt.setInt(1, employeeId );
@@ -175,14 +173,14 @@ public class EmployeeDbUtil {
 
 	public void updateEmployee(Employee theEmployee) throws Exception{
 		//jdbc objects
-		Connection myConn = null;
+		//Connection myConn = null;
 		PreparedStatement myStmt = null;
 		
 	
 		try {
 		//get DB Connection
-		Class.forName("com.mysql.jdbc.Driver");
-		myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");
+//		Class.forName("com.mysql.jdbc.Driver");
+//		myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");
 		
 		
 		//sql
@@ -191,7 +189,7 @@ public class EmployeeDbUtil {
 		
 		//prepare stmt
 		
-		myStmt = myConn.prepareStatement(sql);
+		myStmt = getConnection().prepareStatement(sql);
 		
 		
 		//set statement params using the employee object passed in from the controller servlet
@@ -218,7 +216,7 @@ public class EmployeeDbUtil {
 		
 		
 		//jdbc objects
-		Connection myConn = null;
+		//Connection myConn = null;
 		PreparedStatement myStmt = null;
 		int employeeId; 
 		
@@ -227,8 +225,8 @@ public class EmployeeDbUtil {
 			employeeId = Integer.parseInt(theEmployeeId);
 			
 			//get DB Connection
-			Class.forName("com.mysql.jdbc.Driver");
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");
+//			Class.forName("com.mysql.jdbc.Driver");
+//			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee-tracker?useSSL=false", "employee", "employee");
 			
 			
 			//sql 
@@ -236,7 +234,7 @@ public class EmployeeDbUtil {
 			
 			//prepare stmt;
 			
-			myStmt = myConn.prepareStatement(sql);
+			myStmt = getConnection().prepareStatement(sql);
 			
 			//set params
 			
